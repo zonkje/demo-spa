@@ -1,11 +1,11 @@
 export class Post {
 
-  public title: String;
-  public authorName: String;
-  public content: String;
-  public creationDateTime: String;
+  public title: string;
+  public authorName: string;
+  public content: string;
+  public creationDateTime: string;
 
-  constructor(title: String, authorName: String, content: String, creationDateTime: String) {
+  constructor(title: string, authorName: string, content: string, creationDateTime: string) {
     this.title = title;
     this.authorName = authorName;
     this.content = content;
