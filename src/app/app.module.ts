@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import {SidenavComponent} from './sidenav/sidenav.component';
 import { PostsComponent } from './posts/posts.component';
 import { PostListComponent } from './posts/post-list/post-list.component';
-import { PostDetailComponent } from './posts/post-detail/post-detail.component';
+import { PostDetailsComponent } from './posts/post-details/post-details.component';
 import { PostItemComponent } from './posts/post-list/post-item/post-item.component';
 
 
@@ -17,7 +17,7 @@ import { PostItemComponent } from './posts/post-list/post-item/post-item.compone
     SidenavComponent,
     PostsComponent,
     PostListComponent,
-    PostDetailComponent,
+    PostDetailsComponent,
     PostItemComponent,
 
   ],
