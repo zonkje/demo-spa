@@ -8,6 +8,7 @@ import { PostsComponent } from './posts/posts.component';
 import { PostListComponent } from './posts/post-list/post-list.component';
 import { PostDetailsComponent } from './posts/post-details/post-details.component';
 import { PostItemComponent } from './posts/post-list/post-item/post-item.component';
+import { ProfileComponent } from './profile/profile.component';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { PostItemComponent } from './posts/post-list/post-item/post-item.compone
     PostListComponent,
     PostDetailsComponent,
     PostItemComponent,
+    ProfileComponent,
 
   ],
   imports: [

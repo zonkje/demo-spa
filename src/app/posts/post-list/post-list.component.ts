@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Post} from '../post.model';
 
 @Component({
@@ -8,18 +8,20 @@ import {Post} from '../post.model';
 })
 export class PostListComponent implements OnInit {
 
+  @Output() postElementSelected = new EventEmitter<Post>();
+
   posts: Post[] = [
-<<<<<<< HEAD
-    new Post('Tytul', 'Moj pierwszy post', 'dzisiaj 12:00', 'Szymek')
-=======
-    new Post("Title of post", "Szymek", "Content of this interesting post", "yesterday"),
-    new Post("Another title", "Ptys", "Meow meow meow meow", "tomorrow"),
->>>>>>> f03162f2ca2ba5baca19da0de5df4b25c2c4dae7
+    new Post("Title of post", "Content of this interesting post", "yesterday", "Szymek"),
+    new Post("Another title", "Meow meow meow meow", "tomorrow", "Ptys"),
   ];
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  onPostSelected(post: Post){
+    this.postElementSelected.emit(post);
   }
 
 }

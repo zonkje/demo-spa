@@ -1,1 +1,21 @@
-<p>post-item works!</p>
+<a
+  style="margin-top: 5px; margin-bottom: 5px"
+  href="#"
+  class="list-group-item clearfix"
+  (click)="onShowDetails()"
+>
+  <div class="pull-left">
+    <h4 class="list-group-item-heading">{{ post.authorName }}</h4>
+    <div class="row">
+      <div class="col-xs-4">
+        <h5 class="list-group-item-heading">{{ post.title }}</h5>
+      </div>
+      <div class="col-xs-8">
+        <p class="list-group-item-info small">{{ post.creationDateTime }}</p>
+      </div>
+    </div>
+    <p class="list-group-item-text">{{ post.content }}</p>
+    <hr>
+    Comments(x)
+  </div>
+</a>
