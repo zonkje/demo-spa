@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Post} from '../../post.model';
+import {PostService} from '../../post.service';
 
 @Component({
   selector: 'app-post-item',
@@ -10,14 +11,12 @@ export class PostItemComponent implements OnInit {
 
   @Input() post: Post;
 
-  @Output() selectedPost = new EventEmitter<void>();
-
-  constructor() { }
+  constructor(private postService: PostService) { }
 
   ngOnInit(): void {
   }
   onShowDetails(){
-    this.selectedPost.emit();
+    this.postService.selectedPost.emit(this.post);
   }
 
 }

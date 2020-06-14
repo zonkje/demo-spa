@@ -1,5 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Post} from '../post.model';
+import {PostService} from '../post.service';
 
 @Component({
   selector: 'app-post-list',
@@ -8,20 +9,12 @@ import {Post} from '../post.model';
 })
 export class PostListComponent implements OnInit {
 
-  @Output() postElementSelected = new EventEmitter<Post>();
+  posts: Post[];
 
-  posts: Post[] = [
-    new Post("Title of post", "Content of this interesting post", "yesterday", "Szymek"),
-    new Post("Another title", "Meow meow meow meow", "tomorrow", "Ptys"),
-  ];
-
-  constructor() { }
+  constructor(private postService: PostService) { }
 
   ngOnInit(): void {
-  }
-
-  onPostSelected(post: Post){
-    this.postElementSelected.emit(post);
+    this.posts = this.postService.getPosts();
   }
 
 }
