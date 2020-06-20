@@ -9,6 +9,7 @@ import { PostListComponent } from './posts/post-list/post-list.component';
 import { PostDetailsComponent } from './posts/post-details/post-details.component';
 import { PostItemComponent } from './posts/post-list/post-item/post-item.component';
 import { ProfileComponent } from './profile/profile.component';
+import {AppRoutingModule} from './app-routing.module';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { ProfileComponent } from './profile/profile.component';
 
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

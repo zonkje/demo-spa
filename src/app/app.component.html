@@ -4,8 +4,7 @@
       <app-sidenav (featureSelected)="onNavigate($event)"></app-sidenav>
     </div>
     <div class="col-md-9">
-      <app-posts *ngIf="loadedFeature ==='posts'"></app-posts>
-      <app-profile *ngIf="loadedFeature !=='posts'"></app-profile>
+      <router-outlet></router-outlet>
     </div>
   </div>
 </div>
