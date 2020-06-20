@@ -5,6 +5,7 @@ import {ProfileComponent} from './profile/profile.component';
 
 const appRoutes: Routes = [
   {path: '', redirectTo: '/posts', pathMatch: 'full'},
+  {path: 'posts', component: PostsComponent},
   {path: 'profile', component: ProfileComponent}
 ]
 
