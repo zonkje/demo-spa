@@ -10,6 +10,7 @@ import { PostDetailsComponent } from './posts/post-details/post-details.componen
 import { PostItemComponent } from './posts/post-list/post-item/post-item.component';
 import { ProfileComponent } from './profile/profile.component';
 import {AppRoutingModule} from './app-routing.module';
+import { PostStartComponent } from './posts/post-start/post-start.component';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import {AppRoutingModule} from './app-routing.module';
     PostDetailsComponent,
     PostItemComponent,
     ProfileComponent,
+    PostStartComponent,
 
   ],
   imports: [

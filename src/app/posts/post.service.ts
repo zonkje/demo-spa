@@ -14,4 +14,8 @@ export class PostService {
     return this.posts.slice();
   }
 
+  getPost(index: number){
+    return this.posts[index];
+  }
+
 }

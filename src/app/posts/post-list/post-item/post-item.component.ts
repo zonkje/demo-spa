@@ -10,13 +10,9 @@ import {PostService} from '../../post.service';
 export class PostItemComponent implements OnInit {
 
   @Input() post: Post;
-
-  constructor(private postService: PostService) { }
+  @Input() index: number;
 
   ngOnInit(): void {
-  }
-  onShowDetails(){
-    this.postService.selectedPost.emit(this.post);
   }
 
 }
