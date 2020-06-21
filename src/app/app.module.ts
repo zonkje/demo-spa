@@ -11,6 +11,7 @@ import { PostItemComponent } from './posts/post-list/post-item/post-item.compone
 import { ProfileComponent } from './profile/profile.component';
 import {AppRoutingModule} from './app-routing.module';
 import { PostStartComponent } from './posts/post-start/post-start.component';
+import { PostEditComponent } from './posts/post-edit/post-edit.component';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { PostStartComponent } from './posts/post-start/post-start.component';
     PostItemComponent,
     ProfileComponent,
     PostStartComponent,
+    PostEditComponent,
 
   ],
   imports: [
