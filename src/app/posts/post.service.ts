@@ -1,9 +1,6 @@
 import {Post} from './post.model';
-import {EventEmitter} from '@angular/core';
 
 export class PostService {
-
-  selectedPost = new EventEmitter<Post>();
 
   private posts: Post[] = [
     new Post("Title of post", "Content of this interesting post", "yesterday", "Szymek"),
