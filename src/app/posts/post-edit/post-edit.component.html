@@ -1,1 +1,37 @@
-<p>post-edit works!</p>
+<div class="row">
+  <div class="col-xs-12">
+    <form [formGroup]="postEditForm">
+      <div class="row">
+        <div class="col-xs-12">
+          <button typ="submit" class="btn btn-success">Submit</button> |
+          <button typ="button" class="btn btn-danger">Cancel</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="title">Title</label>
+            <input
+              type="text"
+              id="title"
+              class="form-control"
+            >
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="content">Content</label>
+            <textarea
+              type="text"
+              id="content"
+              class="form-control"
+              rows="6"
+            ></textarea>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Params} from '@angular/router';
+import {FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-post-edit',
@@ -8,6 +9,7 @@ import {ActivatedRoute, Params} from '@angular/router';
 })
 export class PostEditComponent implements OnInit {
 
+  postEditForm: FormGroup;
   id: number;
   editMode: boolean = false;
 
@@ -20,6 +22,9 @@ export class PostEditComponent implements OnInit {
         this.editMode = params['id'] != null;
       }
     )
+    this.postEditForm = new FormGroup({
+
+    })
   }
 
 }

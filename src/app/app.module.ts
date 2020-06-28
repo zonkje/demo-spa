@@ -12,12 +12,12 @@ import { ProfileComponent } from './profile/profile.component';
 import {AppRoutingModule} from './app-routing.module';
 import { PostStartComponent } from './posts/post-start/post-start.component';
 import { PostEditComponent } from './posts/post-edit/post-edit.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-
     SidenavComponent,
     PostsComponent,
     PostListComponent,
@@ -30,6 +30,8 @@ import { PostEditComponent } from './posts/post-edit/post-edit.component';
   ],
   imports: [
     BrowserModule,
+    ReactiveFormsModule,
+    FormsModule,
     AppRoutingModule,
   ],
   providers: [],
