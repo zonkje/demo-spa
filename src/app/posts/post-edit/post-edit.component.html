@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-xs-12">
-    <form [formGroup]="postEditForm">
+    <form [formGroup]="postForm" (ngSubmit)="onSubmit()">
       <div class="row">
         <div class="col-xs-12">
           <button typ="submit" class="btn btn-success">Submit</button> |
@@ -15,6 +15,7 @@
               type="text"
               id="title"
               class="form-control"
+              formControlName="title"
             >
           </div>
         </div>
@@ -28,6 +29,7 @@
               id="content"
               class="form-control"
               rows="6"
+              formControlName="content"
             ></textarea>
           </div>
         </div>
