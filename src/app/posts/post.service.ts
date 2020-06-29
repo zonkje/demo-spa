@@ -27,4 +27,9 @@ export class PostService {
     this.postChanged.next(this.posts.slice());
   }
 
+  deletePost(index: number){
+    this.posts.splice(index,1);
+    this.postChanged.next(this.posts.slice());
+  }
+
 }

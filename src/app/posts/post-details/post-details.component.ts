@@ -31,4 +31,9 @@ export class PostDetailsComponent implements OnInit {
     this.router.navigate(['edit'], {relativeTo: this.route});
   }
 
+  onDeletePost(){
+    this.postService.deletePost(this.id);
+    this.router.navigate(['/posts'])
+  }
+
 }

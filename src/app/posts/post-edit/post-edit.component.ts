@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Params} from '@angular/router';
+import {ActivatedRoute, Params, Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {PostService} from '../post.service';
 import {Post} from '../post.model';
@@ -15,7 +15,7 @@ export class PostEditComponent implements OnInit {
   id: number;
   editMode: boolean = false;
 
-  constructor(private route: ActivatedRoute, private postService: PostService) {
+  constructor(private route: ActivatedRoute, private postService: PostService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -41,7 +41,11 @@ export class PostEditComponent implements OnInit {
     } else {
       this.postService.addPost(newPost);
     }
-    console.log('meow');
+    this.onCancel();
+  }
+
+  onCancel(){
+    this.router.navigate(['../'], {relativeTo: this.route});
   }
 
   private initForm() {
