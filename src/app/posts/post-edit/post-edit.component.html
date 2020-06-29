@@ -3,7 +3,8 @@
     <form [formGroup]="postForm" (ngSubmit)="onSubmit()">
       <div class="row">
         <div class="col-xs-12">
-          <button typ="submit" class="btn btn-success">Submit</button> |
+          <button typ="submit" class="btn btn-success" [disabled]="postForm.invalid">Submit</button>
+          |
           <button typ="button" class="btn btn-danger">Cancel</button>
         </div>
       </div>

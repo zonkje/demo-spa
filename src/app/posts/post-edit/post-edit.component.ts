@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Params} from '@angular/router';
-import {FormControl, FormGroup} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {PostService} from '../post.service';
+import {Post} from '../post.model';
 
 @Component({
   selector: 'app-post-edit',
@@ -14,7 +15,8 @@ export class PostEditComponent implements OnInit {
   id: number;
   editMode: boolean = false;
 
-  constructor(private route: ActivatedRoute, private postService: PostService) { }
+  constructor(private route: ActivatedRoute, private postService: PostService) {
+  }
 
   ngOnInit(): void {
     this.route.params.subscribe(
@@ -25,21 +27,34 @@ export class PostEditComponent implements OnInit {
       }
     );
   }
-  onSubmit(){
-    console.log(this.postForm.value);
+
+  onSubmit() {
+    const newPost = new Post(
+      this.postForm.value['title'],
+      this.postForm.value['content'],
+      'tmpLoremIpsumDate',
+      'tmpLoremIpsumAuthor'
+    );
+    if (this.editMode) {
+      this.postService.updatePost(this.id, newPost
+      );
+    } else {
+      this.postService.addPost(newPost);
+    }
+    console.log('meow');
   }
 
   private initForm() {
     let postTitle = '';
     let postContent = '';
-    if(this.editMode) {
+    if (this.editMode) {
       postTitle = this.postService.getPost(this.id).title;
       postContent = this.postService.getPost(this.id).content;
     }
 
     this.postForm = new FormGroup({
-      'title': new FormControl(postTitle),
-      'content': new FormControl(postContent),
+      'title': new FormControl(postTitle, Validators.required),
+      'content': new FormControl(postContent, Validators.required),
     });
   }
 
