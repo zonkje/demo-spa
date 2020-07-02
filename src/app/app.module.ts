@@ -13,6 +13,7 @@ import {AppRoutingModule} from './app-routing.module';
 import { PostStartComponent } from './posts/post-start/post-start.component';
 import { PostEditComponent } from './posts/post-edit/post-edit.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {PostService} from './posts/post.service';
 
 
 @NgModule({
@@ -34,7 +35,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     FormsModule,
     AppRoutingModule,
   ],
-  providers: [],
+  providers: [PostService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
