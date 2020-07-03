@@ -14,7 +14,7 @@
         <p class="list-group-item-info small">{{ post.creationDateTime }}</p>
       </div>
     </div>
-    <p class="list-group-item-text">{{ post.content }}</p>
+    <p class="list-group-item-text">{{ (post.content.length>46) ? (post.content | slice:0:45)+'...' : (post.content) }}</p>
     <hr>
     Comments(x)
   </div>

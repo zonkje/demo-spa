@@ -8,6 +8,7 @@ export class PostService {
   private posts: Post[] = [
     new Post("Title of post", "Content of this interesting post", "yesterday", "Szymek"),
     new Post("Another title", "Meow meow meow meow", "tomorrow", "Ptys"),
+    new Post("Test title", "Testing long content asdfasdfasdfasdfasdfasdfasdfasdfasdfasdf", "tomorrow", "Ptys"),
   ];
 
   getPosts(){
