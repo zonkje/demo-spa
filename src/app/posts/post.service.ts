@@ -1,7 +1,14 @@
 import {Post} from './post.model';
 import {Subject} from 'rxjs';
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
 
+@Injectable()
 export class PostService {
+
+  constructor(
+    private http: HttpClient
+  ) {}
 
   postChanged = new Subject<Post[]>();
 
@@ -20,6 +27,10 @@ export class PostService {
   }
 
   addPost(post: Post){
+    this.http.post('http://localhost:8080/post', post)
+      .subscribe( response => {
+        console.log(response);
+      })
     this.posts.push(post);
     this.postChanged.next(this.posts.slice());
   }

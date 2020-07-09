@@ -32,8 +32,6 @@ export class PostEditComponent implements OnInit {
     const newPost = new Post(
       this.postForm.value['title'],
       this.postForm.value['content'],
-      'tmpLoremIpsumDate',
-      'tmpLoremIpsumAuthor'
     );
     if (this.editMode) {
       this.postService.updatePost(this.id, newPost

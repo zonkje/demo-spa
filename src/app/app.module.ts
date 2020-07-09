@@ -1,8 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { AppComponent } from './app.component';
 
+import { AppComponent } from './app.component';
 import {SidenavComponent} from './sidenav/sidenav.component';
 import { PostsComponent } from './posts/posts.component';
 import { PostListComponent } from './posts/post-list/post-list.component';
@@ -14,6 +14,7 @@ import { PostStartComponent } from './posts/post-start/post-start.component';
 import { PostEditComponent } from './posts/post-edit/post-edit.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {PostService} from './posts/post.service';
+import {HttpClientModule} from '@angular/common/http';
 
 
 @NgModule({
@@ -27,13 +28,13 @@ import {PostService} from './posts/post.service';
     ProfileComponent,
     PostStartComponent,
     PostEditComponent,
-
   ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
     FormsModule,
     AppRoutingModule,
+    HttpClientModule
   ],
   providers: [PostService],
   bootstrap: [AppComponent]
