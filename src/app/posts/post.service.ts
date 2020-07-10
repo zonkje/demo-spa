@@ -2,6 +2,7 @@ import {Post} from './post.model';
 import {Subject} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Injectable} from '@angular/core';
+import {NewPost} from './new-post.model';
 
 @Injectable()
 export class PostService {
@@ -27,17 +28,16 @@ export class PostService {
     return this.posts[index];
   }
 
-  addPost(post: Post) {
+  addPost(post: NewPost) {
     this.http.post('http://localhost:8080/post', {
-      'title': 'Angular post',
-      'content': 'from angular'
+      post
     }, {
       headers: new HttpHeaders({'Authorization': 'Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJrb3Rla2tvdGVra290ZWsxIiwiYXV0aG9yaXRpZXMiOlt7ImF1dGhvcml0eSI6ImZpeHR1cmU6cmVhZCJ9LHsiYXV0aG9yaXR5IjoicG9zdDp3cml0ZSJ9LHsiYXV0aG9yaXR5IjoiUk9MRV9VU0VSIn0seyJhdXRob3JpdHkiOiJwb3N0OnJlYWQifV0sImlhdCI6MTU5NDM3ODE0OCwiZXhwIjoxNTk2MDYwMDAwfQ.7jwtximBQYT42eYE_GnAVNK89IB7T_WzA04GsZUfYR9PLPipRNgr9Lp4gurch0lS'})
     })
       .subscribe(response => {
         console.log(response);
       });
-    this.posts.push(post);
+    // this.posts.push(post);
     this.postChanged.next(this.posts.slice());
   }
 

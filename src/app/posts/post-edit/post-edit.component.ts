@@ -3,6 +3,7 @@ import {ActivatedRoute, Params, Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {PostService} from '../post.service';
 import {Post} from '../post.model';
+import {NewPost} from '../new-post.model';
 
 @Component({
   selector: 'app-post-edit',
@@ -29,13 +30,12 @@ export class PostEditComponent implements OnInit {
   }
 
   onSubmit() {
-    const newPost = new Post(
+    const newPost = new NewPost(
       this.postForm.value['title'],
       this.postForm.value['content'],
     );
     if (this.editMode) {
-      this.postService.updatePost(this.id, newPost
-      );
+      // this.postService.updatePost(this.id, newPost);
     } else {
       this.postService.addPost(newPost);
     }
