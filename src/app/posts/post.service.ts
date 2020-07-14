@@ -21,6 +21,13 @@ export class PostService {
   ];
 
   getPosts() {
+    this.http.get('http://localhost:8080/post', {
+      headers: new HttpHeaders({'Authorization': 'Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJrb3Rla2tvdGVra290ZWsxIiwiYXV0aG9yaXRpZXMiOlt7ImF1dGhvcml0eSI6ImZpeHR1cmU6cmVhZCJ9LHsiYXV0aG9yaXR5IjoicG9zdDp3cml0ZSJ9LHsiYXV0aG9yaXR5IjoiUk9MRV9VU0VSIn0seyJhdXRob3JpdHkiOiJwb3N0OnJlYWQifV0sImlhdCI6MTU5NDcyNDcxMSwiZXhwIjoxNTk2NDA1NjAwfQ.8KFmW5O71aTKPV93gRycgo-KnIwNegS3mNsziTEM3zgSoJ-OxvwscZS30PDZm_Je'})
+    }).subscribe(
+      posts => {
+        console.log(posts);
+      }
+    );
     return this.posts.slice();
   }
 
@@ -29,10 +36,12 @@ export class PostService {
   }
 
   addPost(post: NewPost) {
-    this.http.post('http://localhost:8080/post', {
+    console.log("Post service");
+    console.log(post);
+    this.http.post('http://localhost:8080/post',
       post
-    }, {
-      headers: new HttpHeaders({'Authorization': 'Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJrb3Rla2tvdGVra290ZWsxIiwiYXV0aG9yaXRpZXMiOlt7ImF1dGhvcml0eSI6ImZpeHR1cmU6cmVhZCJ9LHsiYXV0aG9yaXR5IjoicG9zdDp3cml0ZSJ9LHsiYXV0aG9yaXR5IjoiUk9MRV9VU0VSIn0seyJhdXRob3JpdHkiOiJwb3N0OnJlYWQifV0sImlhdCI6MTU5NDM3ODE0OCwiZXhwIjoxNTk2MDYwMDAwfQ.7jwtximBQYT42eYE_GnAVNK89IB7T_WzA04GsZUfYR9PLPipRNgr9Lp4gurch0lS'})
+    , {
+      headers: new HttpHeaders({'Authorization': 'Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJrb3Rla2tvdGVra290ZWsxIiwiYXV0aG9yaXRpZXMiOlt7ImF1dGhvcml0eSI6ImZpeHR1cmU6cmVhZCJ9LHsiYXV0aG9yaXR5IjoicG9zdDp3cml0ZSJ9LHsiYXV0aG9yaXR5IjoiUk9MRV9VU0VSIn0seyJhdXRob3JpdHkiOiJwb3N0OnJlYWQifV0sImlhdCI6MTU5NDcyNTEyMywiZXhwIjoxNTk2NDA1NjAwfQ.J2gh3z12BDXjTX0--wCJUUk0NZwoxH3KsVvJqBqnqSgsjdyCQQNNdhBoYMG3qjSt'})
     })
       .subscribe(response => {
         console.log(response);
