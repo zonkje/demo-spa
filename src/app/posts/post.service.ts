@@ -15,20 +15,23 @@ export class PostService {
   postChanged = new Subject<Post[]>();
 
   private posts: Post[] = [
-    new Post('Title of post', 'Content of this interesting post', 'yesterday', 'Szymek'),
-    new Post('Another title', 'Meow meow meow meow', 'tomorrow', 'Ptys'),
-    new Post('Test title', 'Testing long content asdfasdfasdfasdfasdfasdfasdfasdfasdfasdf', 'tomorrow', 'Ptys'),
+    // new Post('Title of post', 'Content of this interesting post', 'yesterday', 'Szymek'),
+    // new Post('Another title', 'Meow meow meow meow', 'tomorrow', 'Ptys'),
+    // new Post('Test title', 'Testing long content asdfasdfasdfasdfasdfasdfasdfasdfasdfasdf', 'tomorrow', 'Ptys'),
   ];
 
   getPosts() {
-    this.http.get('http://localhost:8080/post', {
-      headers: new HttpHeaders({'Authorization': 'Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJrb3Rla2tvdGVra290ZWsxIiwiYXV0aG9yaXRpZXMiOlt7ImF1dGhvcml0eSI6ImZpeHR1cmU6cmVhZCJ9LHsiYXV0aG9yaXR5IjoicG9zdDp3cml0ZSJ9LHsiYXV0aG9yaXR5IjoiUk9MRV9VU0VSIn0seyJhdXRob3JpdHkiOiJwb3N0OnJlYWQifV0sImlhdCI6MTU5NDcyNDcxMSwiZXhwIjoxNTk2NDA1NjAwfQ.8KFmW5O71aTKPV93gRycgo-KnIwNegS3mNsziTEM3zgSoJ-OxvwscZS30PDZm_Je'})
+    this.http.get<Post[]>('http://localhost:8080/post', {
+      headers: new HttpHeaders({'Authorization': 'Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJrb3Rla2tvdGVra290ZWsxIiwiYXV0aG9yaXRpZXMiOlt7ImF1dGhvcml0eSI6ImZpeHR1cmU6cmVhZCJ9LHsiYXV0aG9yaXR5IjoicG9zdDp3cml0ZSJ9LHsiYXV0aG9yaXR5IjoiUk9MRV9VU0VSIn0seyJhdXRob3JpdHkiOiJwb3N0OnJlYWQifV0sImlhdCI6MTU5NDgwOTExMSwiZXhwIjoxNTk2NDkyMDAwfQ.aLzJXPr69U1y3YLF-i2QkUGoDGsTolm-uf542PKsKxyzdiX6ctGmANZMUM-Ajoqe'})
     }).subscribe(
       posts => {
         console.log(posts);
+        this.posts = posts;
+        this.postChanged.next(this.posts);
       }
     );
-    return this.posts.slice();
+    // this.postChanged.next(this.posts); // ?
+    return this.posts;                 // ?
   }
 
   getPost(index: number) {
@@ -36,8 +39,6 @@ export class PostService {
   }
 
   addPost(post: NewPost) {
-    console.log("Post service");
-    console.log(post);
     this.http.post('http://localhost:8080/post',
       post
     , {
