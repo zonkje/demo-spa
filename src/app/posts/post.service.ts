@@ -14,15 +14,11 @@ export class PostService {
 
   postChanged = new Subject<Post[]>();
 
-  private posts: Post[] = [
-    // new Post('Title of post', 'Content of this interesting post', 'yesterday', 'Szymek'),
-    // new Post('Another title', 'Meow meow meow meow', 'tomorrow', 'Ptys'),
-    // new Post('Test title', 'Testing long content asdfasdfasdfasdfasdfasdfasdfasdfasdfasdf', 'tomorrow', 'Ptys'),
-  ];
+  private posts: Post[] = [];
 
   getPosts() {
     this.http.get<Post[]>('http://localhost:8080/post', {
-      headers: new HttpHeaders({'Authorization': 'Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJrb3Rla2tvdGVra290ZWsxIiwiYXV0aG9yaXRpZXMiOlt7ImF1dGhvcml0eSI6ImZpeHR1cmU6cmVhZCJ9LHsiYXV0aG9yaXR5IjoicG9zdDp3cml0ZSJ9LHsiYXV0aG9yaXR5IjoiUk9MRV9VU0VSIn0seyJhdXRob3JpdHkiOiJwb3N0OnJlYWQifV0sImlhdCI6MTU5NDgwOTExMSwiZXhwIjoxNTk2NDkyMDAwfQ.aLzJXPr69U1y3YLF-i2QkUGoDGsTolm-uf542PKsKxyzdiX6ctGmANZMUM-Ajoqe'})
+      headers: new HttpHeaders({'Authorization': 'Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJrb3Rla2tvdGVra290ZWsxIiwiYXV0aG9yaXRpZXMiOlt7ImF1dGhvcml0eSI6ImZpeHR1cmU6cmVhZCJ9LHsiYXV0aG9yaXR5IjoicG9zdDp3cml0ZSJ9LHsiYXV0aG9yaXR5IjoiUk9MRV9VU0VSIn0seyJhdXRob3JpdHkiOiJwb3N0OnJlYWQifV0sImlhdCI6MTU5NDg5NDQ2OSwiZXhwIjoxNTk2NTc4NDAwfQ.ujJXkbGPdWaRWhKExRaF7zGSemcJburM5ea_CiSfWOmLBDTfsXTYrUjs7Z3YbqM9'})
     }).subscribe(
       posts => {
         console.log(posts);
@@ -30,35 +26,61 @@ export class PostService {
         this.postChanged.next(this.posts);
       }
     );
-    // this.postChanged.next(this.posts); // ?
-    return this.posts;                 // ?
+    return this.posts;
   }
 
   getPost(index: number) {
-    return this.posts[index];
+    /*
+    * There is a bug in app. We fetch posts from DB only in ngOnInit method in PostListComponent
+    * When user goes straight to the url like /post/2 we have a problem.
+    * We can't show details of specific post because we didn't fetch posts from DB.
+    * We can modify getPost method so that it will send http request for speficic post, but the list of posts won't be displayed anyway.
+    * Adding subscription for all components sounds like a bad idea...
+     */
+    return this.getPostById(index);
   }
 
   addPost(post: NewPost) {
-    this.http.post('http://localhost:8080/post',
+    this.http.post<Post>('http://localhost:8080/post',
       post
-    , {
-      headers: new HttpHeaders({'Authorization': 'Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJrb3Rla2tvdGVra290ZWsxIiwiYXV0aG9yaXRpZXMiOlt7ImF1dGhvcml0eSI6ImZpeHR1cmU6cmVhZCJ9LHsiYXV0aG9yaXR5IjoicG9zdDp3cml0ZSJ9LHsiYXV0aG9yaXR5IjoiUk9MRV9VU0VSIn0seyJhdXRob3JpdHkiOiJwb3N0OnJlYWQifV0sImlhdCI6MTU5NDcyNTEyMywiZXhwIjoxNTk2NDA1NjAwfQ.J2gh3z12BDXjTX0--wCJUUk0NZwoxH3KsVvJqBqnqSgsjdyCQQNNdhBoYMG3qjSt'})
-    })
+      , {
+        headers: new HttpHeaders({'Authorization': 'Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJrb3Rla2tvdGVra290ZWsxIiwiYXV0aG9yaXRpZXMiOlt7ImF1dGhvcml0eSI6ImZpeHR1cmU6cmVhZCJ9LHsiYXV0aG9yaXR5IjoicG9zdDp3cml0ZSJ9LHsiYXV0aG9yaXR5IjoiUk9MRV9VU0VSIn0seyJhdXRob3JpdHkiOiJwb3N0OnJlYWQifV0sImlhdCI6MTU5NDg5NDQ2OSwiZXhwIjoxNTk2NTc4NDAwfQ.ujJXkbGPdWaRWhKExRaF7zGSemcJburM5ea_CiSfWOmLBDTfsXTYrUjs7Z3YbqM9'})
+      })
       .subscribe(response => {
         console.log(response);
+        this.posts.push(response);
+        this.postChanged.next(this.posts);
       });
-    // this.posts.push(post);
-    this.postChanged.next(this.posts.slice());
   }
 
-  updatePost(index: number, newPost: Post) {
-    this.posts[index] = newPost;
-    this.postChanged.next(this.posts.slice());
+  updatePost(index: number, newPost: NewPost) {
+    this.http.patch<Post>('http://localhost:8080/post/' + index,
+      newPost,
+      {
+        headers: new HttpHeaders({'Authorization': 'Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJrb3Rla2tvdGVra290ZWsxIiwiYXV0aG9yaXRpZXMiOlt7ImF1dGhvcml0eSI6ImZpeHR1cmU6cmVhZCJ9LHsiYXV0aG9yaXR5IjoicG9zdDp3cml0ZSJ9LHsiYXV0aG9yaXR5IjoiUk9MRV9VU0VSIn0seyJhdXRob3JpdHkiOiJwb3N0OnJlYWQifV0sImlhdCI6MTU5NDg5NDQ2OSwiZXhwIjoxNTk2NTc4NDAwfQ.ujJXkbGPdWaRWhKExRaF7zGSemcJburM5ea_CiSfWOmLBDTfsXTYrUjs7Z3YbqM9'})
+      }
+    ).subscribe(response => {
+      console.log(response);
+      this.posts.push(response);
+      this.postChanged.next(this.posts);
+    });
   }
 
   deletePost(index: number) {
-    this.posts.splice(index, 1);
-    this.postChanged.next(this.posts.slice());
+    this.http.delete('http://localhost:8080/post/'+index, {
+      headers: new HttpHeaders({'Authorization': 'Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJrb3Rla2tvdGVra290ZWsxIiwiYXV0aG9yaXRpZXMiOlt7ImF1dGhvcml0eSI6ImZpeHR1cmU6cmVhZCJ9LHsiYXV0aG9yaXR5IjoicG9zdDp3cml0ZSJ9LHsiYXV0aG9yaXR5IjoiUk9MRV9VU0VSIn0seyJhdXRob3JpdHkiOiJwb3N0OnJlYWQifV0sImlhdCI6MTU5NDg5NDQ2OSwiZXhwIjoxNTk2NTc4NDAwfQ.ujJXkbGPdWaRWhKExRaF7zGSemcJburM5ea_CiSfWOmLBDTfsXTYrUjs7Z3YbqM9'})
+    }).subscribe( () => {
+      console.log("Delete request sent");
+    })
+  }
+
+  private getPostById(postId: number): Post {
+    for (let post of this.posts) {
+      if (post.id === postId) {
+        return post;
+      }
+    }
+    return null;
   }
 
 }

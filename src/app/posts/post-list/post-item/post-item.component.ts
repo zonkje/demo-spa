@@ -10,9 +10,11 @@ import {PostService} from '../../post.service';
 export class PostItemComponent implements OnInit {
 
   @Input() post: Post;
-  @Input() index: number;
+  // @Input() index: number;
+  index: number;
 
   ngOnInit(): void {
+    this.index = this.post.id;
   }
 
 }

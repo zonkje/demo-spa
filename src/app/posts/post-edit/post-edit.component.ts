@@ -35,7 +35,7 @@ export class PostEditComponent implements OnInit {
       this.postForm.value['content'],
     );
     if (this.editMode) {
-      // this.postService.updatePost(this.id, newPost);
+      this.postService.updatePost(this.id, newPost);
     } else {
       this.postService.addPost(newPost);
     }
