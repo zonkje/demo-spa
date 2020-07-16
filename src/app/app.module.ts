@@ -15,6 +15,7 @@ import { PostEditComponent } from './posts/post-edit/post-edit.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {PostService} from './posts/post.service';
 import {HttpClientModule} from '@angular/common/http';
+import {PostsResolverService} from './posts/posts-resolver.service';
 
 
 @NgModule({
@@ -36,7 +37,7 @@ import {HttpClientModule} from '@angular/common/http';
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [PostService],
+  providers: [PostService, PostsResolverService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
