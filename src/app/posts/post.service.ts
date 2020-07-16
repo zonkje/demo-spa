@@ -26,7 +26,6 @@ export class PostService {
         this.postChanged.next(this.posts);
       }
     );
-    return this.posts;
   }
 
   getPost(index: number) {
@@ -48,7 +47,8 @@ export class PostService {
       })
       .subscribe(response => {
         console.log(response);
-        this.posts.push(response);
+        // or better way will be to push response data to this.posts array?
+        this.getPosts();
         this.postChanged.next(this.posts);
       });
   }
@@ -61,7 +61,7 @@ export class PostService {
       }
     ).subscribe(response => {
       console.log(response);
-      this.posts.push(response);
+      this.getPosts();
       this.postChanged.next(this.posts);
     });
   }
@@ -71,6 +71,8 @@ export class PostService {
       headers: new HttpHeaders({'Authorization': 'Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJrb3Rla2tvdGVra290ZWsxIiwiYXV0aG9yaXRpZXMiOlt7ImF1dGhvcml0eSI6ImZpeHR1cmU6cmVhZCJ9LHsiYXV0aG9yaXR5IjoicG9zdDp3cml0ZSJ9LHsiYXV0aG9yaXR5IjoiUk9MRV9VU0VSIn0seyJhdXRob3JpdHkiOiJwb3N0OnJlYWQifV0sImlhdCI6MTU5NDg5NDQ2OSwiZXhwIjoxNTk2NTc4NDAwfQ.ujJXkbGPdWaRWhKExRaF7zGSemcJburM5ea_CiSfWOmLBDTfsXTYrUjs7Z3YbqM9'})
     }).subscribe( () => {
       console.log("Delete request sent");
+      this.getPosts();
+      this.postChanged.next(this.posts);
     })
   }
 
