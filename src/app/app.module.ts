@@ -18,6 +18,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {PostsResolverService} from './posts/posts-resolver.service';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
+import {AuthService} from './auth/auth.service';
 
 
 @NgModule({
@@ -41,7 +42,7 @@ import { RegisterComponent } from './auth/register/register.component';
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [PostService, PostsResolverService],
+  providers: [PostService, PostsResolverService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
