@@ -16,6 +16,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {PostService} from './posts/post.service';
 import {HttpClientModule} from '@angular/common/http';
 import {PostsResolverService} from './posts/posts-resolver.service';
+import { LoginComponent } from './auth/login/login.component';
+import { RegisterComponent } from './auth/register/register.component';
 
 
 @NgModule({
@@ -29,6 +31,8 @@ import {PostsResolverService} from './posts/posts-resolver.service';
     ProfileComponent,
     PostStartComponent,
     PostEditComponent,
+    LoginComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
