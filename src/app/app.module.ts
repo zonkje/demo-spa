@@ -19,6 +19,7 @@ import {PostsResolverService} from './posts/posts-resolver.service';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import {AuthService} from './auth/auth.service';
+import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 
 
 @NgModule({
@@ -34,6 +35,7 @@ import {AuthService} from './auth/auth.service';
     PostEditComponent,
     LoginComponent,
     RegisterComponent,
+    LoadingSpinnerComponent,
   ],
   imports: [
     BrowserModule,

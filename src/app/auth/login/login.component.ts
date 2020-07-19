@@ -10,6 +10,8 @@ import {AuthService} from '../auth.service';
 export class LoginComponent implements OnInit {
 
   signInForm: FormGroup;
+  isLoading: boolean = false;
+  error = null;
 
   constructor(private authService: AuthService) { }
 
@@ -29,13 +31,17 @@ export class LoginComponent implements OnInit {
     const username = this.signInForm.get('username').value;
     const password = this.signInForm.get('password').value;
 
+    this.isLoading = true;
     this.authService.signUp(username, password).subscribe(
       responseData => {
         console.log(responseData);
         console.log(responseData.headers.get('Authorization'));
+        this.isLoading = false;
       },
       error => {
         console.log(error);
+        this.error = 'An error occurred!';
+        this.isLoading = false;
       }
     );
 
