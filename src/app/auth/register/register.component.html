@@ -1,47 +1,96 @@
 <div class="row">
   <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
-    <!-- Default form register -->
-    <form class="text-center border border-light p-5" action="#!">
+    <div class="alert alert-danger" *ngIf="error">
+      <p>{{ error }}</p>
+    </div>
+    <div *ngIf="isLoading" style="text-align: center">
+      <app-loading-spinner></app-loading-spinner>
+    </div>
+    <form
+      class="text-center border border-light p-5"
+      [formGroup]="signUpForm"
+      (ngSubmit)="onSubmit()"
+      *ngIf="!isLoading"
+    >
 
       <p class="h3 mb-4">Sign up</p>
 
-      <!-- Username -->
-      <input type="text" id="username" class="form-control" placeholder="Username">
-      <small id="usernameRequirements" class="form-text text-muted mb-4">
-        At least X characters
+      <input
+        type="text"
+        id="username"
+        class="form-control"
+        placeholder="Username"
+        formControlName="username"
+      >
+      <small
+        *ngIf="!signUpForm.get('username').valid && signUpForm.get('username').touched"
+        id="usernameRequirements"
+        style="color: red"
+        class="form-text text-muted mb-4">
+        Please enter username
       </small>
 
-      <!-- Password -->
-      <input type="password" id="password" class="form-control" placeholder="Password">
-      <small id="passwordRequirements" class="form-text text-muted mb-4">
-        At least X characters
+      <input
+        type="password"
+        id="password"
+        class="form-control"
+        placeholder="Password"
+        formControlName="password"
+      >
+      <small
+        *ngIf="!signUpForm.get('password').valid && signUpForm.get('password').touched"
+        id="passwordRequirements"
+        style="color: red"
+        class="form-text text-muted mb-4">
+        Please enter password
       </small>
 
       <div class="form-row mb-4">
         <div class="col">
-          <!-- First name -->
-          <input type="text" id="firstName" class="form-control" placeholder="First name">
+          <input
+            type="text"
+            id="firstName"
+            class="form-control"
+            placeholder="First name"
+            formControlName="firstName"
+          >
         </div>
         <div class="col">
-          <!-- Last name -->
-          <input type="text" id="lastName" class="form-control" placeholder="Last name">
+          <input
+            type="text"
+            id="lastName"
+            class="form-control"
+            placeholder="Last name"
+            formControlName="lastName"
+          >
         </div>
       </div>
 
-      <!-- E-mail -->
-      <input type="email" id="email" class="form-control mb-4" placeholder="E-mail">
+      <input
+        type="email"
+        id="email"
+        class="form-control mb-4"
+        placeholder="E-mail"
+        formControlName="email"
+      >
+      <small
+        *ngIf="!signUpForm.get('email').valid && signUpForm.get('email').touched"
+        id="emailRequirements"
+        class="form-text text-muted mb-4">
+        Please enter email
+      </small>
 
-      <!-- Sign up button -->
-      <button class="btn btn-info my-4 btn-block" type="submit">Sign up</button>
+      <button class="btn btn-info my-4 btn-block"
+              type="submit"
+              [disabled]="!signUpForm.valid"
+      >Sign up</button>
 
       <hr>
 
-      <!-- Terms of service -->
       <p>By clicking
         <em>Sign up</em> you agree to our
         <a href="" target="_blank">terms of service</a>
 
     </form>
-    <!-- Default form register -->
   </div>
 </div>

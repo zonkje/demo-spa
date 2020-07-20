@@ -32,15 +32,16 @@ export class LoginComponent implements OnInit {
     const password = this.signInForm.get('password').value;
 
     this.isLoading = true;
-    this.authService.signUp(username, password).subscribe(
+    this.authService.signIn(username, password).subscribe(
       responseData => {
         console.log(responseData);
         console.log(responseData.headers.get('Authorization'));
         this.isLoading = false;
       },
-      error => {
-        console.log(error);
-        this.error = 'An error occurred!';
+      responseError => {
+        console.log(responseError);
+        // change it after improving api
+        this.error = 'An error occurred! Login failed';
         this.isLoading = false;
       }
     );
