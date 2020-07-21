@@ -34,8 +34,8 @@ export class LoginComponent implements OnInit {
     this.isLoading = true;
     this.authService.signIn(username, password).subscribe(
       responseData => {
-        console.log(responseData);
-        console.log(responseData.headers.get('Authorization'));
+        console.log(responseData);                              // BUG: getting empty HttpResponse
+        console.log(responseData.headers.get('Authorization')); // BUG: getting null
         this.isLoading = false;
       },
       responseError => {

@@ -20,9 +20,9 @@ export class RegisterComponent implements OnInit {
     this.signUpForm = new FormGroup({
       'username': new FormControl(null, Validators.required),
       'password': new FormControl(null, Validators.required),
-      'firstName': new FormControl(null),
-      'lastName': new FormControl(null),
-      'email': new FormControl(null, Validators.email),
+      'firstName': new FormControl(null, Validators.required),
+      'lastName': new FormControl(null, Validators.required),
+      'email': new FormControl(null, [ Validators.email, Validators.required]),
     });
 
   }
@@ -51,6 +51,7 @@ export class RegisterComponent implements OnInit {
           console.log(responseData);
           this.isLoading = false;
         }, errorResponse => {
+          // replace this with catchError later
           this.error = 'An error occurred! Registration failed';
           this.isLoading = false;
         }

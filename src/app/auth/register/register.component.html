@@ -54,7 +54,16 @@
             placeholder="First name"
             formControlName="firstName"
           >
+          <small
+            *ngIf="!signUpForm.get('firstName').valid && signUpForm.get('firstName').touched"
+            id="firstNameRequirements"
+            style="color: red"
+            class="form-text text-muted mb-4">
+            Please enter first name
+          </small>
+
         </div>
+
         <div class="col">
           <input
             type="text"
@@ -63,6 +72,13 @@
             placeholder="Last name"
             formControlName="lastName"
           >
+          <small
+            *ngIf="!signUpForm.get('lastName').valid && signUpForm.get('lastName').touched"
+            id="lastNameRequirements"
+            style="color: red"
+            class="form-text text-muted mb-4">
+            Please enter last name
+          </small>
         </div>
       </div>
 
@@ -83,13 +99,18 @@
       <button class="btn btn-info my-4 btn-block"
               type="submit"
               [disabled]="!signUpForm.valid"
-      >Sign up</button>
+      >Sign up
+      </button>
 
       <hr>
 
       <p>By clicking
         <em>Sign up</em> you agree to our
         <a href="" target="_blank">terms of service</a>
+
+      <p>Already have an account?
+        <a routerLink="/login"><strong>Login here</strong></a>
+      </p>
 
     </form>
   </div>
