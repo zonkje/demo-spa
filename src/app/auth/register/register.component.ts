@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../auth.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -13,7 +14,7 @@ export class RegisterComponent implements OnInit {
   isLoading: boolean = false;
   error = null;
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
 
@@ -39,17 +40,13 @@ export class RegisterComponent implements OnInit {
     const lastName = this.signUpForm.get('lastName').value;
     const email = this.signUpForm.get('email').value;
 
-    console.log(username);
-    console.log(password);
-    console.log(firstName);
-    console.log(lastName);
-    console.log(email);
-
     this.authService.signUp(username, password, firstName, lastName, email)
       .subscribe(
         responseData => {
           console.log(responseData);
           this.isLoading = false;
+          this.router.navigate(['/login']);
+          // after this redirection we have you display message above login form, like: "Registration success, you can now sign in!"
         }, errorResponse => {
           // replace this with catchError later
           this.error = 'An error occurred! Registration failed';

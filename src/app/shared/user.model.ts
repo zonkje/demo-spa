@@ -4,10 +4,5 @@ export class User {
     public firstName: string,
     public lastName: string,
     public email: string,
-    private _jwt: string) {
-  }
-
-  get jwt() {
-    return this._jwt;
-  }
+  ) {}
 }

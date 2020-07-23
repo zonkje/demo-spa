@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../auth.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,8 @@ export class LoginComponent implements OnInit {
   isLoading: boolean = false;
   error = null;
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private router: Router) {
+  }
 
   ngOnInit(): void {
 
@@ -24,8 +26,8 @@ export class LoginComponent implements OnInit {
 
   }
 
-  onSubmit(){
-    if(!this.signInForm.valid){
+  onSubmit() {
+    if (!this.signInForm.valid) {
       return;
     }
     const username = this.signInForm.get('username').value;
@@ -34,9 +36,10 @@ export class LoginComponent implements OnInit {
     this.isLoading = true;
     this.authService.signIn(username, password).subscribe(
       responseData => {
-        console.log(responseData);                              // BUG: getting empty HttpResponse
-        console.log(responseData.headers.get('Authorization')); // BUG: getting null
+        console.log(responseData);
+        console.log(responseData.headers.get('Authorization'));
         this.isLoading = false;
+        this.router.navigate(['/posts']);
       },
       responseError => {
         console.log(responseError);
