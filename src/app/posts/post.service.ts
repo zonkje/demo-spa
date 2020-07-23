@@ -18,16 +18,14 @@ export class PostService {
   private posts: Post[] = [];
 
   getPosts() {
-    return this.http.get<Post[]>('http://localhost:8080/post', {
-      headers: new HttpHeaders({'Authorization': 'Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJrb3Rla2tvdGVra290ZWsxIiwiYXV0aG9yaXRpZXMiOlt7ImF1dGhvcml0eSI6ImZpeHR1cmU6cmVhZCJ9LHsiYXV0aG9yaXR5IjoicG9zdDp3cml0ZSJ9LHsiYXV0aG9yaXR5IjoiUk9MRV9VU0VSIn0seyJhdXRob3JpdHkiOiJwb3N0OnJlYWQifV0sImlhdCI6MTU5NDkzNzYwOCwiZXhwIjoxNTk2NjY0ODAwfQ.hpdPxcYyBmA5mfmm85AMttcXSfPhX1g0VV0wiOrPYpGGBvyXQPHD-y4-mxRxD1YR'})
-    }).pipe(
-      tap(posts => {
-        console.log(posts);
-        this.posts = posts;
-        this.postChanged.next(this.posts);
-      })
-    );
-
+    return this.http.get<Post[]>('http://localhost:8080/post')
+      .pipe(
+        tap(posts => {
+          console.log(posts);
+          this.posts = posts;
+          this.postChanged.next(this.posts);
+        })
+      );
   }
 
   getPost(index: number) {
@@ -36,10 +34,7 @@ export class PostService {
 
   addPost(post: NewPost) {
     this.http.post<Post>('http://localhost:8080/post',
-      post
-      , {
-        headers: new HttpHeaders({'Authorization': 'Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJrb3Rla2tvdGVra290ZWsxIiwiYXV0aG9yaXRpZXMiOlt7ImF1dGhvcml0eSI6ImZpeHR1cmU6cmVhZCJ9LHsiYXV0aG9yaXR5IjoicG9zdDp3cml0ZSJ9LHsiYXV0aG9yaXR5IjoiUk9MRV9VU0VSIn0seyJhdXRob3JpdHkiOiJwb3N0OnJlYWQifV0sImlhdCI6MTU5NDkzNzYwOCwiZXhwIjoxNTk2NjY0ODAwfQ.hpdPxcYyBmA5mfmm85AMttcXSfPhX1g0VV0wiOrPYpGGBvyXQPHD-y4-mxRxD1YR'})
-      })
+      post)
       .subscribe(response => {
         console.log(response);
         // or better way will be to push response data to this.posts array?
@@ -50,25 +45,21 @@ export class PostService {
 
   updatePost(index: number, newPost: NewPost) {
     this.http.patch<Post>('http://localhost:8080/post/' + index,
-      newPost,
-      {
-        headers: new HttpHeaders({'Authorization': 'Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJrb3Rla2tvdGVra290ZWsxIiwiYXV0aG9yaXRpZXMiOlt7ImF1dGhvcml0eSI6ImZpeHR1cmU6cmVhZCJ9LHsiYXV0aG9yaXR5IjoicG9zdDp3cml0ZSJ9LHsiYXV0aG9yaXR5IjoiUk9MRV9VU0VSIn0seyJhdXRob3JpdHkiOiJwb3N0OnJlYWQifV0sImlhdCI6MTU5NDkzNzYwOCwiZXhwIjoxNTk2NjY0ODAwfQ.hpdPxcYyBmA5mfmm85AMttcXSfPhX1g0VV0wiOrPYpGGBvyXQPHD-y4-mxRxD1YR'})
-      }
-    ).subscribe(response => {
-      console.log(response);
-      this.getPosts().subscribe();
-      this.postChanged.next(this.posts);
-    });
+      newPost)
+      .subscribe(response => {
+        console.log(response);
+        this.getPosts().subscribe();
+        this.postChanged.next(this.posts);
+      });
   }
 
   deletePost(index: number) {
-    this.http.delete('http://localhost:8080/post/' + index, {
-      headers: new HttpHeaders({'Authorization': 'Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJrb3Rla2tvdGVra290ZWsxIiwiYXV0aG9yaXRpZXMiOlt7ImF1dGhvcml0eSI6ImZpeHR1cmU6cmVhZCJ9LHsiYXV0aG9yaXR5IjoicG9zdDp3cml0ZSJ9LHsiYXV0aG9yaXR5IjoiUk9MRV9VU0VSIn0seyJhdXRob3JpdHkiOiJwb3N0OnJlYWQifV0sImlhdCI6MTU5NDkzNzYwOCwiZXhwIjoxNTk2NjY0ODAwfQ.hpdPxcYyBmA5mfmm85AMttcXSfPhX1g0VV0wiOrPYpGGBvyXQPHD-y4-mxRxD1YR'})
-    }).subscribe(() => {
-      console.log('Delete request sent');
-      this.getPosts().subscribe();
-      this.postChanged.next(this.posts);
-    });
+    this.http.delete('http://localhost:8080/post/' + index)
+      .subscribe(() => {
+        console.log('Delete request sent');
+        this.getPosts().subscribe();
+        this.postChanged.next(this.posts);
+      });
   }
 
   private getPostById(postId: number): Post {

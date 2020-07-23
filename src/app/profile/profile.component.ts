@@ -16,7 +16,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.userSubscription = this.authService.user.subscribe(
-      user => {
+      (user: User) => {
         // there is some bug: this code never gets executed
         console.log("inside subscription "+user);
         this.user = user;

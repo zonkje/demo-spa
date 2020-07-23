@@ -36,8 +36,6 @@ export class LoginComponent implements OnInit {
     this.isLoading = true;
     this.authService.signIn(username, password).subscribe(
       responseData => {
-        console.log(responseData);
-        console.log(responseData.headers.get('Authorization'));
         this.isLoading = false;
         this.router.navigate(['/posts']);
       },

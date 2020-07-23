@@ -1,6 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AuthService} from '../auth/auth.service';
 import {Subscription} from 'rxjs';
+import {User} from '../shared/user.model';
 
 @Component({
   selector: 'app-sidenav',
@@ -17,7 +18,7 @@ export class SidenavComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
 
     this.userSubscription = this.authService.user.subscribe( user => {
-      console.log("from heaDER "+user)
+      console.log("from heaDER "+user);
       this.isAuthenticated = !!user;
     });
 
