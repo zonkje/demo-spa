@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {User} from '../shared/user.model';
 import {BehaviorSubject, Subject} from 'rxjs';
 import {tap} from 'rxjs/operators';
+import {Router} from '@angular/router';
 
 @Injectable()
 export class AuthService {
@@ -10,7 +11,7 @@ export class AuthService {
   user = new BehaviorSubject<User>(null);
   token = new BehaviorSubject<string>(null);
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
   }
 
   signIn(username: string, password: string) {
@@ -38,6 +39,11 @@ export class AuthService {
       lastName: lastName,
       email: email
     });
+  }
+
+  logout(){
+    this.user.next(null);
+    this.router.navigate(['/login']);
   }
 
   private getUserById(id: string) {

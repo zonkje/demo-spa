@@ -16,17 +16,17 @@ export class SidenavComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-
     this.userSubscription = this.authService.user.subscribe( user => {
       console.log("from heaDER "+user);
       this.isAuthenticated = !!user;
     });
+  }
 
+  onLogout() {
+    this.authService.logout();
   }
 
   ngOnDestroy(): void {
-
     this.userSubscription.unsubscribe();
-
   }
 }

@@ -11,7 +11,11 @@
   <li class="nav-item" routerLinkActive="active" *ngIf="!isAuthenticated">
     <a class="nav-link" routerLink="/register">Register</a>
   </li>
-  <li class="nav-item" *ngIf="isAuthenticated">
-    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Logout</a>
+  <li class="nav-item" *ngIf="isAuthenticated" >
+    <a class="nav-link disabled"
+       tabindex="-1"
+       aria-disabled="true"
+       (click)="onLogout()"
+    >Logout</a>
   </li>
 </ul>
