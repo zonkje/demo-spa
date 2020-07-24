@@ -10,6 +10,7 @@ export class AuthService {
 
   user = new BehaviorSubject<User>(null);
   token = new BehaviorSubject<string>(null);
+  private tokenExpirationTimer: any;
 
   constructor(private http: HttpClient, private router: Router) {
   }
@@ -23,9 +24,18 @@ export class AuthService {
     }).pipe(
       tap(
         responseData => {
-          this.token.next(responseData.headers.get('Authorization'));
+          const token = responseData.headers.get('Authorization');
+          const tokenExpirationTime = responseData.headers.get('Token-Exp-Days');
+          this.token.next(token);
           const userId = responseData.headers.get('UserID');
-          this.getUserById(userId);
+          this.getUserById(userId).subscribe(user => {
+            const loggedUser = new User(user.id, user.firstName, user.lastName, user.email);
+            this.user.next(loggedUser);
+            this.autoLogout(+tokenExpirationTime*86400000);
+            localStorage.setItem('userData', JSON.stringify(loggedUser));
+          });
+          localStorage.setItem('token', token);
+          localStorage.setItem('tokenExpirationTime', tokenExpirationTime);
         }
       )
     );
@@ -41,20 +51,39 @@ export class AuthService {
     });
   }
 
-  logout(){
+  autoLogin() {
+    const userData: User = JSON.parse(localStorage.getItem('userData'));
+    const storedToken: string = localStorage.getItem('token');
+    if (!userData) {
+      return;
+    }
+    const loadedUser = new User(userData.id, userData.firstName, userData.lastName, userData.email);
+    // We need to calculate the time to expiry
+    // this.autoLogout();
+    this.user.next(loadedUser);
+    this.token.next(storedToken);
+  }
+
+  logout() {
     this.user.next(null);
     this.router.navigate(['/login']);
+    localStorage.removeItem('userData');
+    localStorage.removeItem('token');
+    localStorage.removeItem('tokenExpirationTime');
+    if (this.tokenExpirationTimer) {
+      clearTimeout(this.tokenExpirationTimer);
+    }
+    this.tokenExpirationTimer = null;
+  }
+
+  autoLogout(expirationDuration: number) {
+    this.tokenExpirationTimer = setTimeout(() => {
+      this.logout();
+    }, expirationDuration);
   }
 
   private getUserById(id: string) {
-    this.http.get<User>('http://localhost:8080/user/' + id)
-      .subscribe(user => {
-        console.log(user);
-        const loggedUser = new User(user.id, user.firstName, user.lastName, user.email);
-        console.log('after User constructor');
-        console.log(loggedUser);
-        this.user.next(loggedUser);
-      });
+    return this.http.get<User>('http://localhost:8080/user/' + id);
   }
 
 }
