@@ -21,14 +21,6 @@ import {PostsRoutingModule} from './posts-routing.module';
   ],
   imports: [
     RouterModule, CommonModule, ReactiveFormsModule, PostsRoutingModule
-  ],
-  exports: [
-    PostsComponent,
-    PostListComponent,
-    PostDetailsComponent,
-    PostItemComponent,
-    PostStartComponent,
-    PostEditComponent,
   ]
 })
 export class PostsModule {

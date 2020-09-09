@@ -20,6 +20,7 @@ import {AlertComponent} from './shared/alert/alert.component';
 import {PlaceholderDirective} from './shared/placeholder/placeholder.directive';
 import {PostsModule} from './posts/posts.module';
 import {AppRoutingModule} from './app-routing.module';
+import {CoreModule} from './core.module';
 
 @NgModule({
   declarations: [
@@ -39,17 +40,7 @@ import {AppRoutingModule} from './app-routing.module';
     HttpClientModule,
     PostsModule,
     AppRoutingModule,
-  ],
-  providers: [
-    PostService,
-    PostsResolverService,
-    AuthService,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptorService,
-      multi: true
-    },
-    AuthGuard
+    CoreModule
   ],
   bootstrap: [AppComponent]
 })
