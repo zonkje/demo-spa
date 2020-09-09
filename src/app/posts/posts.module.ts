@@ -6,9 +6,9 @@ import {PostDetailsComponent} from './post-details/post-details.component';
 import {PostItemComponent} from './post-list/post-item/post-item.component';
 import {PostStartComponent} from './post-start/post-start.component';
 import {PostEditComponent} from './post-edit/post-edit.component';
-import {CommonModule} from '@angular/common';
 import {ReactiveFormsModule} from '@angular/forms';
 import {PostsRoutingModule} from './posts-routing.module';
+import {SharedModule} from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -20,7 +20,7 @@ import {PostsRoutingModule} from './posts-routing.module';
     PostEditComponent,
   ],
   imports: [
-    RouterModule, CommonModule, ReactiveFormsModule, PostsRoutingModule
+    RouterModule, SharedModule, ReactiveFormsModule, PostsRoutingModule
   ]
 })
 export class PostsModule {
