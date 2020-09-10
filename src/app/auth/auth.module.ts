@@ -15,11 +15,12 @@ import {SharedModule} from '../shared/shared.module';
     CommonModule,
     ReactiveFormsModule,
     RouterModule.forChild([
-      {path: 'login', component: LoginComponent},
-      {path: 'register', component: RegisterComponent}
+        {path: 'login', component: LoginComponent},
+        {path: 'register', component: RegisterComponent}
       ]
     ),
     SharedModule
   ]
 })
-export class AuthModule{}
+export class AuthModule {
+}

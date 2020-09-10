@@ -8,7 +8,7 @@ import {PostDetailsComponent} from './post-details/post-details.component';
 import {PostsResolverService} from './posts-resolver.service';
 
 const routes: Routes = [
-  {path: 'posts', component: PostsComponent, canActivate: [AuthGuard] ,children: [
+  {path: '', component: PostsComponent, canActivate: [AuthGuard] ,children: [
       { path: '', component: PostStartComponent },
       { path: 'new', component: PostEditComponent },
       { path: ':id', component: PostDetailsComponent, resolve: [PostsResolverService]},

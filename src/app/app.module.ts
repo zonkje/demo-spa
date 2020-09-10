@@ -8,11 +8,10 @@ import {ProfileComponent} from './profile/profile.component';
 import {FormsModule} from '@angular/forms';
 
 import {HttpClientModule} from '@angular/common/http';
-import {PostsModule} from './posts/posts.module';
 import {CoreModule} from './core.module';
 import {AppRoutingModule} from './app-routing.module';
-import {AuthModule} from './auth/auth.module';
 import {SharedModule} from './shared/shared.module';
+import {AuthModule} from './auth/auth.module';
 
 @NgModule({
   declarations: [
@@ -24,9 +23,8 @@ import {SharedModule} from './shared/shared.module';
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    SharedModule,
-    PostsModule,
     AuthModule,
+    SharedModule,
     CoreModule,
     AppRoutingModule
   ],
