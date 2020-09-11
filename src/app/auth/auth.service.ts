@@ -4,6 +4,7 @@ import {User} from '../shared/user.model';
 import {BehaviorSubject, Subject} from 'rxjs';
 import {tap} from 'rxjs/operators';
 import {Router} from '@angular/router';
+import {environment} from '../../environments/environment';
 
 @Injectable()
 export class AuthService {
@@ -16,7 +17,7 @@ export class AuthService {
   }
 
   signIn(username: string, password: string) {
-    return this.http.post<any>('http://localhost:8080/login', {
+    return this.http.post<any>(environment.host+'login', {
       username: username,
       password: password
     }, {
@@ -42,7 +43,7 @@ export class AuthService {
   }
 
   signUp(username: string, password: string, firstName: string, lastName: string, email: string) {
-    return this.http.post<User>('http://localhost:8080/register', {
+    return this.http.post<User>(environment.host+'register', {
       username: username,
       password: password,
       firstName: firstName,
@@ -83,7 +84,7 @@ export class AuthService {
   }
 
   private getUserById(id: string) {
-    return this.http.get<User>('http://localhost:8080/user/' + id);
+    return this.http.get<User>(environment.host+'user/' + id);
   }
 
 }

@@ -4,6 +4,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {NewPost} from './new-post.model';
 import {tap} from 'rxjs/operators';
+import {environment} from '../../environments/environment';
 
 @Injectable()
 export class PostService {
@@ -18,7 +19,7 @@ export class PostService {
   private posts: Post[] = [];
 
   getPosts() {
-    return this.http.get<Post[]>('http://localhost:8080/post')
+    return this.http.get<Post[]>(environment.host+'post')
       .pipe(
         tap(posts => {
           console.log(posts);
@@ -33,7 +34,7 @@ export class PostService {
   }
 
   addPost(post: NewPost) {
-    this.http.post<Post>('http://localhost:8080/post',
+    this.http.post<Post>(environment.host+'post',
       post)
       .subscribe(response => {
         console.log(response);
@@ -44,7 +45,7 @@ export class PostService {
   }
 
   updatePost(index: number, newPost: NewPost) {
-    this.http.patch<Post>('http://localhost:8080/post/' + index,
+    this.http.patch<Post>(environment.host+'post/' + index,
       newPost)
       .subscribe(response => {
         console.log(response);
@@ -54,7 +55,7 @@ export class PostService {
   }
 
   deletePost(index: number) {
-    this.http.delete('http://localhost:8080/post/' + index)
+    this.http.delete(environment.host+'post/' + index)
       .subscribe(() => {
         console.log('Delete request sent');
         this.getPosts().subscribe();
